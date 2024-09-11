@@ -41,10 +41,10 @@ public class RouteController {
       departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
 
       if (!departmentMapping.containsKey(deptCode.toUpperCase())) {
-        return new ResponseEntity<>("Department Not Found", HttpStatus.OK);
+        return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
       } else {
         return new ResponseEntity<>(departmentMapping.get(deptCode.toUpperCase()).toString(),
-            HttpStatus.NOT_FOUND);
+            HttpStatus.OK);
       }
 
     } catch (Exception e) {
@@ -77,7 +77,7 @@ public class RouteController {
           return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
         } else {
           return new ResponseEntity<>(coursesMapping.get(Integer.toString(courseCode)).toString(),
-              HttpStatus.FORBIDDEN);
+              HttpStatus.OK);
         }
 
       }
@@ -136,7 +136,7 @@ public class RouteController {
       if (doesDepartmentExists) {
         HashMap<String, Department> departmentMapping;
         departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
-        return new ResponseEntity<>("There are: " + -departmentMapping.get(deptCode)
+        return new ResponseEntity<>("There are: " + departmentMapping.get(deptCode)
             .getNumberOfMajors() + " majors in the department", HttpStatus.OK);
       }
       return new ResponseEntity<>("Department Not Found", HttpStatus.FORBIDDEN);
@@ -264,7 +264,8 @@ public class RouteController {
         coursesMapping = departmentMapping.get(deptCode).getCourseSelection();
 
         Course requestedCourse = coursesMapping.get(Integer.toString(courseCode));
-        return new ResponseEntity<>("The course meets at: " + "some time ",
+        return new ResponseEntity<>("The course meets at: "
+            + requestedCourse.getCourseTimeSlot() + ".",
             HttpStatus.OK);
       } else {
         return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
@@ -351,7 +352,8 @@ public class RouteController {
         if (isStudentDropped) {
           return new ResponseEntity<>("Student has been dropped.", HttpStatus.OK);
         } else {
-          return new ResponseEntity<>("Student has not been dropped.", HttpStatus.BAD_REQUEST);
+          return new ResponseEntity<>("Student has not been dropped.",
+              HttpStatus.BAD_REQUEST);
         }
       } else {
         return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
@@ -362,7 +364,7 @@ public class RouteController {
   }
 
   /**
-   * WRITE A DESCRIPTION.
+   * Attempts to set enrollment count of a course within a particular department.
    *
    * @param deptCode the code of the department containing the course
    * @param courseCode the code of the course to change the time for
@@ -468,10 +470,12 @@ public class RouteController {
   }
 
   /**
-   * WRITE A DESCRIPTION.
+   * Endpoint for changing the location of a course. This method handles PATCH requests to change
+   * the location of a course identified by department code and course code. If the course exists,
+   * its location is updated to the provided location.
    *
    * @param deptCode the code of the department containing the course
-   * @param courseCode the code of the course to change the instructor for
+   * @param courseCode the code of the course to change the location for
    * @param location location of the course
    * @return a ResponseEntity with a success message if the operation is successful, or an error
    *     if it fails
