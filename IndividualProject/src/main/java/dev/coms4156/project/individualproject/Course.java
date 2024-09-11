@@ -46,12 +46,12 @@ public class Course implements Serializable {
 
 
   public String getCourseLocation() {
-    return this.instructorName;
+    return this.courseLocation;
   }
 
 
   public String getInstructorName() {
-    return this.courseLocation;
+    return this.instructorName;
   }
 
 
@@ -86,9 +86,19 @@ public class Course implements Serializable {
   }
 
 
-  public boolean isCourseFull() {
-    return enrollmentCapacity > enrolledStudentCount;
+  public int getEnrolledStudentCount() {
+    return this.enrolledStudentCount;
   }
+
+
+  public int getCapacity() {
+    return this.enrollmentCapacity;
+  }
+
+  public boolean isCourseFull() {
+    return getCapacity() < getEnrolledStudentCount();
+  }
+
 
   @Serial
   private static final long serialVersionUID = 123456L;
