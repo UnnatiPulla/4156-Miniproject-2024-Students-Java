@@ -1,0 +1,10 @@
+FILE NAME               BUGS                                                                                   INFO
+Course.java             getCourseLocation() and getInstructorName() had swapped return values.                 Found out via failing unit tests that I created.
+Course.java             getEnrolledStudentCount() method is missing. There is no getter for a crucial value.
+Course.java             No getters for enrollment capacity. This leads to difficulty in debugging              Found out while adding a test case - isCourseFullTest()
+                        and maintenance.
+Course.java             isCourseFull() was returning the wrong value. It was returning
+                        capacity > enrolledStudentCount instead of capacity < enrolledStudentCount
+
+
+
