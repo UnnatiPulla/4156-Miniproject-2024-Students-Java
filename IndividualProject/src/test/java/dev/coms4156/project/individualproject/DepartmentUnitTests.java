@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
 /**
  * This class contains unit tests for Department class.
  */
+@SpringBootTest
+@ContextConfiguration
 public class DepartmentUnitTests {
 
   /**
@@ -73,9 +77,26 @@ public class DepartmentUnitTests {
     assertEquals(3, testDepartment.getNumberOfMajors());
   }
 
+  @Test
+  public void addCourseTest() {
+    Course course = new Course("Milan Delor", "209 HAV", "1:10-5:00", 24);
+    testDepartment.addCourse("4102", course);
+    assertEquals(course, testDepartment.getCourseSelection().get("4102"));
+  }
 
+  @Test
+  public void createAndAddCourseTest() {
+    Course course = new Course("Milan Delor", "209 HAV", "1:10-5:00", 24);
+    testDepartment.createAndAddCourse("4102", "Milan Delor", "209 HAV", "1:10-5:00", 24);
+    assertEquals(course.toString(), testDepartment.getCourseSelection().get("4102").toString());
+  }
 
-
+  @Test
+  public void toStringTest() {
+    String expected = "BIOL 1105: \nInstructor: Waseem Noor; Location: 428 PUP; Time: 8:40-9:55\n"
+        + "BIOL 2257: \nInstructor: Tamrat Gashaw; Location: 428 PUP; Time: 8:40-9:55\n";
+    assertEquals(expected, testDepartment.toString());
+  }
 
   /** The test department instance used for testing. */
   public static Department testDepartment;
