@@ -18,8 +18,20 @@ Department.java         addPersonToMajor() is the wrong name for the method. Bas
 Department.java         dropPersonFromMajor() is the wrong name for the method. Based on the javadoc, it is supposed
                         to be decrementMajorCount(). Small check i.e., if(numberOfMajors > 0) { numberOfMajors--; }
                         to check major count is to be added based on javadoc too.
-Department.java         The method createCourse() needds to be renamed to createAndAddCourse() based on the javadoc.
+Department.java         The method createCourse() needs to be renamed to createAndAddCourse() based on the javadoc.
 Department.java         toString returned "result.toString()" instead of result.toString()                              Found out while writing unit tests
+RouteController.java    in retrieveDepartment(), HTTP status code/responses were swapped. We are supposed to return
+                        200 code for the case where we are able to successfully retrieve and NOT FOUND in case we
+                        did not find. It was incorrectly swapped.
+RouteController.java    in retrieveCourse(), when we are able to successfully retrieve the course we were incorrectly
+                        returning http status code of FORBIDDEN. It is supposed to be OK
+RouteController.java    in getMajorCtFromDept(), before departmentMapping.getCode(), there was a '-' character.
+                        This needs to be removed since it is a typo and will lead to errors since getCode()
+                        returns an object and negating it with a '-' does not make sense.
+RouteController.java    in findCourseTime() method, while displaying the retrieved course time, the method incorrectly
+                        displays "some time" instead of requestedCourse.getCourseTimeSlot().
+
+
 
 
 
