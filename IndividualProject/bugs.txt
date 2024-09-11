@@ -4,7 +4,12 @@ Course.java             getEnrolledStudentCount() method is missing. There is no
 Course.java             No getters for enrollment capacity. This leads to difficulty in debugging              Found out while adding a test case - isCourseFullTest()
                         and maintenance.
 Course.java             isCourseFull() was returning the wrong value. It was returning
-                        capacity > enrolledStudentCount instead of capacity < enrolledStudentCount
+                        capacity > enrolledStudentCount instead of capacity <= enrolledStudentCount
+Course.java             enrollStudent() was not doing what it is supposed to do as described in the javadoc
+Course.java             enrolledStudentCount field was being initialized as 500, but it should start from 0.
+Course.java             dropStudent() was not performing the actions as described in javadoc.
+
+
 
 
 
