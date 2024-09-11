@@ -111,6 +111,26 @@ public class CourseUnitTests {
     assertEquals(expectedResult, testCourse.enrollStudent());
   }
 
+  @Test
+  public void dropStudentTest_true() {
+    testCourse.setEnrolledStudentCount(255);
+    testCourse.dropStudent();
+    boolean expectedResultBoolean = true;
+    int expectedEnrolledStudentCount = 254;
+    assertEquals(expectedEnrolledStudentCount, testCourse.getEnrolledStudentCount());
+    assertEquals(expectedResultBoolean, testCourse.dropStudent());
+  }
+
+  @Test
+  public void dropStudentTest_false() {
+    testCourse.setEnrolledStudentCount(0);
+    testCourse.dropStudent();
+    boolean expectedResultBoolean = false;
+    int expectedEnrolledStudentCount = 0;
+    assertEquals(expectedEnrolledStudentCount, testCourse.getEnrolledStudentCount());
+    assertEquals(expectedResultBoolean, testCourse.dropStudent());
+  }
+
   /** The test course instance used for testing. */
   public static Course testCourse;
 }
