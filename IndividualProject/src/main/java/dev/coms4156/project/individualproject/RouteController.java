@@ -290,7 +290,7 @@ public class RouteController {
         departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
 
         Department specifiedDept = departmentMapping.get(deptCode);
-        specifiedDept.addPersonToMajor();
+        specifiedDept.incrementMajorCount();
         return new ResponseEntity<>("Attribute was updated successfully", HttpStatus.OK);
       }
       return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
@@ -315,7 +315,7 @@ public class RouteController {
         departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
 
         Department specifiedDept = departmentMapping.get(deptCode);
-        specifiedDept.dropPersonFromMajor();
+        specifiedDept.decrementMajorCount();
         return new ResponseEntity<>("Attribute was updated or is at minimum", HttpStatus.OK);
       }
       return new ResponseEntity<>("Department Not Found", HttpStatus.NOT_FOUND);
