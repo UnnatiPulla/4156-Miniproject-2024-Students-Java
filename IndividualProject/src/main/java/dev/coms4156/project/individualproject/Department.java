@@ -38,6 +38,7 @@ public class Department implements Serializable {
   /**
    * Sets the number of majors in the department.
    *
+   * @param numberOfMajors The number of majors to set the field to.
    */
   public void setNumberOfMajors(int numberOfMajors) {
     this.numberOfMajors = numberOfMajors;

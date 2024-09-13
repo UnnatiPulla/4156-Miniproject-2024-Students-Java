@@ -14,6 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration
 public class CourseUnitTests {
 
+  /**
+   * Set up to perform before each method in this unit test class runs.
+   */
   @BeforeEach
   public void setupCourseForTesting() {
     testCourse = new Course("Griffin Newbold", "417 IAB", "11:40-12:55", 250);

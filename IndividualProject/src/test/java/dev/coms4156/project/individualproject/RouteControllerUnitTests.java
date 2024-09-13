@@ -23,21 +23,21 @@ public class RouteControllerUnitTests {
     routeController = new RouteController();
     IndividualProjectApplication app = new IndividualProjectApplication();
     // We are configuring the app so that myFileDatabase has data from data.txt
-    // for us to test against
+    // for us to test against.
     String[] args = {"start up"};
     app.run(args);
   }
 
   @Test
   public void indexTest() {
-    String indexRes = routeController.index();
-    assertNotNull(indexRes);
-    assertTrue(indexRes.contains("Welcome, in order to make"));
+    String response = routeController.index();
+    assertNotNull(response);
+    assertTrue(response.contains("Welcome, in order to make"));
   }
 
   @Test
   public void isCourseFullTest() {
-    // COMS 3134 is not full as we know from the data provided to us in data.txt.
+    // COMS 3134 is NOT full as we know from the data provided to us in data.txt.
     ResponseEntity<?> response = routeController.isCourseFull("COMS", 3134);
     assertNotNull(response);
     // Successfully received response since course exists.
@@ -87,7 +87,8 @@ public class RouteControllerUnitTests {
 
   @Test
   public void retrieveDepartmentTest_NotFound() {
-    String deptCode = "invalid_dept";
+    // We know BIOL is not a valid dept in the data we are using.
+    String deptCode = "BIOL";
     ResponseEntity<?> response = routeController.retrieveDepartment(deptCode);
     assertEquals(404, response.getStatusCode().value());
     assertEquals("Department Not Found", response.getBody());
@@ -210,7 +211,7 @@ public class RouteControllerUnitTests {
 
   @Test
   public void setEnrollmentCountTest() {
-    // We know from the data provided to us that ieor 4511 has 50 students enrolled
+    // We know from the data provided to us that ieor4511 has 50 students enrolled
     // in it and we should be able to successfully set enrollment count.
     String expectedResponse = "Attributed was updated successfully.";
     ResponseEntity<?> response = routeController.setEnrollmentCount("IEOR",
@@ -221,7 +222,7 @@ public class RouteControllerUnitTests {
 
   @Test
   public void setEnrollmentCountTest_invalidCourse() {
-    // We know from the data provided to us that ieor 4512 is not a valid course.
+    // We know from the data provided to us that ieor4512 is not a valid course.
     String expectedResponse = "Course Not Found";
     ResponseEntity<?> response = routeController.setEnrollmentCount("IEOR",
         4512, 100);

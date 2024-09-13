@@ -38,7 +38,7 @@ public class IndividualProjectApplicationUnitTests {
   @Test
   public void mainTest() {
     String[] args = {"0"};
-    // Asserting myFileDatabase has no department mapping to begin with
+    // Asserting myFileDatabase has no department mapping to begin with (before main())
     assertTrue(IndividualProjectApplication.myFileDatabase.getDepartmentMapping().isEmpty());
     IndividualProjectApplication.main(args);
     // Asserting that myFileDatabase has department mapping after running main()
