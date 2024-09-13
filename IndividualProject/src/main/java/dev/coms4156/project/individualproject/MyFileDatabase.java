@@ -1,13 +1,7 @@
 package dev.coms4156.project.individualproject;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * This class represents a file-based database containing department mappings.
@@ -33,7 +27,7 @@ public class MyFileDatabase {
    *
    * @param mapping the mapping of department names to Department objects
    */
-  public void setMapping(Map<String, Department> mapping) {
+  public void setMapping(HashMap<String, Department> mapping) {
     this.departmentMapping = mapping;
   }
 
@@ -42,7 +36,7 @@ public class MyFileDatabase {
    *
    * @return the deserialized department mapping
    */
-  public Map<String, Department> deSerializeObjectFromFile() {
+  public HashMap<String, Department> deSerializeObjectFromFile() {
     try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
       Object obj = in.readObject();
       if (obj instanceof HashMap) {
@@ -52,7 +46,7 @@ public class MyFileDatabase {
       }
     } catch (IOException | ClassNotFoundException e) {
       e.printStackTrace();
-      return Collections.emptyMap();
+      return null;
     }
   }
 
@@ -74,7 +68,7 @@ public class MyFileDatabase {
    *
    * @return the department mapping
    */
-  public Map<String, Department> getDepartmentMapping() {
+  public HashMap<String, Department> getDepartmentMapping() {
     return this.departmentMapping;
   }
 
@@ -98,5 +92,5 @@ public class MyFileDatabase {
   private String filePath;
 
   /** The mapping of department names to Department objects. */
-  private Map<String, Department> departmentMapping;
+  private HashMap<String, Department> departmentMapping;
 }
