@@ -1,0 +1,25 @@
+FILE NAME               BUGS                                                                                           INFO
+Course.java             getCourseLocation() and getInstructorName() had swapped return values.                         Found out via failing unit tests that I created.
+Course.java             getEnrolledStudentCount() method is missing. There is no getter for a crucial value.
+Course.java             No getters for enrollment capacity. This leads to difficulty in debugging                      Found out while adding a test case - isCourseFullTest()
+                        and maintenance.
+Course.java             isCourseFull() was returning the wrong value. It was returning
+                        capacity > enrolledStudentCount instead of capacity <= enrolledStudentCount
+Course.java             enrollStudent() was not doing what it is supposed to do as described in the javadoc
+Course.java             enrolledStudentCount field was being initialized as 500, but it should start from 0.
+Course.java             dropStudent() was not performing the actions as described in javadoc.
+
+Department.java         in method getNumberOfMajors(), there was a typo that returned -this.numberOfMajors
+                        instead of this.numberOfMajors.
+Department.java         in method getDepartmentChair(), there was a typo that returned "this.departmentChair"
+                        instead of this.departmentChair.
+Department.java         addPersonToMajor() is the wrong name for the method. Based on the javadoc, it is supposed
+                        to be incrementMajorCount()
+Department.java         dropPersonFromMajor() is the wrong name for the method. Based on the javadoc, it is supposed
+                        to be decrementMajorCount(). Small check i.e., if(numberOfMajors > 0) { numberOfMajors--; }
+                        to check major count is to be added based on javadoc too.
+Department.java         The method createCourse() needds to be renamed to createAndAddCourse() based on the javadoc.
+Department.java         toString returned "result.toString()" instead of result.toString()                              Found out while writing unit tests
+
+
+
