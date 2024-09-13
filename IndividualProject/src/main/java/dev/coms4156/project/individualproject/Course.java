@@ -4,7 +4,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * This class contains information pertaining to a course.
+ * Represents a course within an educational institution. This class stores information
+ * about the course, like its instructor name, course location, time slot, capacity, etc.
  */
 public class Course implements Serializable {
 
@@ -52,61 +53,101 @@ public class Course implements Serializable {
     }
   }
 
-
+  /**
+   * Gets the course's location.
+   *
+   * @return string containing the location where the course meets.
+   */
   public String getCourseLocation() {
     return this.courseLocation;
   }
 
-
+  /**
+   * Gets the course's instructor name.
+   *
+   * @return string containing the instructor of the course.
+   */
   public String getInstructorName() {
     return this.instructorName;
   }
 
-
+  /**
+   * Gets the course's time slot.
+   *
+   * @return string containing the time slot of the course.
+   */
   public String getCourseTimeSlot() {
     return this.courseTimeSlot;
   }
 
-
+  @Override
   public String toString() {
     return "\nInstructor: " + instructorName + "; Location: " + courseLocation
         + "; Time: " + courseTimeSlot;
   }
 
-
+  /**
+   * Changes instructor of the course to a new instructor.
+   *
+   * @param newInstructorName name of the new instructor.
+   */
   public void reassignInstructor(String newInstructorName) {
     this.instructorName = newInstructorName;
   }
 
-
+  /**
+   * Changes location of the course.
+   *
+   * @param newLocation new location of the course.
+   */
   public void reassignLocation(String newLocation) {
     this.courseLocation = newLocation;
   }
 
-
+  /**
+   * Changes time slot of the course.
+   *
+   * @param newTime new time of the course.
+   */
   public void reassignTime(String newTime) {
     this.courseTimeSlot = newTime;
   }
 
-
+  /**
+   * Sets the number of students enrolled in the course.
+   *
+   * @param count number of students enrolled in the course.
+   */
   public void setEnrolledStudentCount(int count) {
     this.enrolledStudentCount = count;
   }
 
-
+  /**
+   * Gets the number of students enrolled in the course.
+   *
+   * @return number of students enrolled in the course.
+   */
   public int getEnrolledStudentCount() {
     return this.enrolledStudentCount;
   }
 
-
+  /**
+   * Gets number of students that can be enrolled in the course (capacity).
+   *
+   * @return capacity of course.
+   */
   public int getCapacity() {
     return this.enrollmentCapacity;
   }
 
+  /**
+   * Tells whether a course is full/at capacity.
+   *
+   * @return true if course is full, and false if course still has space for more students.
+   */
   public boolean isCourseFull() {
     return getCapacity() <= getEnrolledStudentCount();
   }
-
 
   @Serial
   private static final long serialVersionUID = 123456L;

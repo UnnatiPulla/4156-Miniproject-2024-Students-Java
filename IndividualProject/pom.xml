@@ -107,7 +107,43 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.23.0</version> <!-- Use the latest version available -->
+				<configuration>
+					<rulesets>
+						<ruleset>/rulesets/java/quickstart.xml</ruleset>
+					</rulesets>
+					<!-- Configuration options, if any -->
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>pmd</goal>
+							<goal>cpd-check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.23.0</version> <!-- Use the latest version available -->
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>pmd</report> <!-- To generate PMD report -->
+							<report>cpd</report> <!-- To generate Copy/Paste detection report -->
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

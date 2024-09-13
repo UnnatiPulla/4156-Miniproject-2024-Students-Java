@@ -1,4 +1,5 @@
 FILE NAME               BUGS                                                                                           INFO
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Course.java             getCourseLocation() and getInstructorName() had swapped return values.                         Found out via failing unit tests that I created.
 Course.java             getEnrolledStudentCount() method is missing. There is no getter for a crucial value.
 Course.java             No getters for enrollment capacity. This leads to difficulty in debugging                      Found out while adding a test case - isCourseFullTest()
@@ -18,8 +19,51 @@ Department.java         addPersonToMajor() is the wrong name for the method. Bas
 Department.java         dropPersonFromMajor() is the wrong name for the method. Based on the javadoc, it is supposed
                         to be decrementMajorCount(). Small check i.e., if(numberOfMajors > 0) { numberOfMajors--; }
                         to check major count is to be added based on javadoc too.
-Department.java         The method createCourse() needds to be renamed to createAndAddCourse() based on the javadoc.
+Department.java         The method createCourse() needs to be renamed to createAndAddCourse() based on the javadoc.
 Department.java         toString returned "result.toString()" instead of result.toString()                              Found out while writing unit tests
+RouteController.java    in retrieveDepartment(), HTTP status code/responses were swapped. We are supposed to return
+                        200 code for the case where we are able to successfully retrieve and NOT FOUND in case we
+                        did not find. It was incorrectly swapped.
+RouteController.java    in retrieveCourse(), when we are able to successfully retrieve the course we were incorrectly
+                        returning http status code of FORBIDDEN. It is supposed to be OK
+RouteController.java    in getMajorCtFromDept(), before departmentMapping.getCode(), there was a '-' character.
+                        This needs to be removed since it is a typo and will lead to errors since getCode()
+                        returns an object and negating it with a '-' does not make sense.
+RouteController.java    in findCourseTime() method, while displaying the retrieved course time, the method incorrectly
+                        displays "some time" instead of requestedCourse.getCourseTimeSlot().
+
+
+
+
+                                              PMD VIOLATIONS (Static Bug Analyzer that I used)
+Classes                Violations - All these violations below were in all classes on the left side
+-------------------------------------------------------------------------------------------------------------------
+Department.java
+Course.java
+IndividualProjectApp    1. All these 5 classes listed on the left hand side had PMD violations for "Avoid using implementation
+MyFileDatabase          types like 'HashMap'; use the interface instead". This is of the type Loose Coupling.
+RouteController         I fixed them by using Map instead of HashMap.
+
+                        2. There were also PMD violations for using @RequestParam(value = "xxx"). I
+                        n these cases as per PMD rulesets, we don't need "value =" if there is only
+                        one param. hence I removed "value = " from all the classes wherever appropriate to
+                        fix these violations.
+
+                        3. "UseLocaleWithCaseConversions" rule was bring violated in RouteController
+                        wherever we are converting to upper case or lower case. So to fix the violation we should use a Locale.
+                        We can use Locale.US, Locale.UK, Locale.ROOT, etc. I used Locale.ROOT since it is language-neutral.
+
+                        4. In MyFileDatabase, in deserializeObjectFromFile, we return a null value
+                        in case an exception occurs. This lead to a PMD violation that asks to return empty collection rather than "null".
+                        To fix it I changed return null; to return Collections.emptyMap(); This avoids NPE too.
+
+                        5. The "LiteralsFirstInComparisons" was violated in IndividualProjectApplication.java when we used
+                        arg.equals("setup"). This is risky to use since right side of the .equals is a literal value.
+                        To fix this we change it to "setup".equals(arg). This way in case of arg being null, we will
+                        prevent an NPE.
+
+
+
 
 
 
