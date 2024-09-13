@@ -57,21 +57,23 @@ public class DepartmentUnitTests {
   }
 
   @Test
+  public void decrementMajorCountTest_doesNotDecrement2() {
+    testDepartment.setNumberOfMajors(-1);
+    testDepartment.decrementMajorCount();
+    // Major count stays the same
+    assertEquals(-1, testDepartment.getNumberOfMajors());
+  }
+
+  @Test
   public void decrementMajorCountTest_decrements1() {
     testDepartment.setNumberOfMajors(1);
     testDepartment.decrementMajorCount();
+    // Decrements by 1
     assertEquals(0, testDepartment.getNumberOfMajors());
   }
 
   @Test
   public void decrementMajorCountTest_decrements2() {
-    testDepartment.setNumberOfMajors(-1);
-    testDepartment.decrementMajorCount();
-    assertEquals(-1, testDepartment.getNumberOfMajors());
-  }
-
-  @Test
-  public void decrementMajorCountTest_decrements3() {
     testDepartment.setNumberOfMajors(4);
     testDepartment.decrementMajorCount();
     assertEquals(3, testDepartment.getNumberOfMajors());

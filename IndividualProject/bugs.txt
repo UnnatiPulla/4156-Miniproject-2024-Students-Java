@@ -42,19 +42,19 @@ Department.java
 Course.java
 IndividualProjectApp    1. All these 5 classes listed on the left hand side had PMD violations for "Avoid using implementation
 MyFileDatabase          types like 'HashMap'; use the interface instead". This is of the type Loose Coupling.
-RouteController         I fixed them by using Map instead of HashMap
+RouteController         I fixed them by using Map instead of HashMap.
 
                         2. There were also PMD violations for using @RequestParam(value = "xxx"). I
                         n these cases as per PMD rulesets, we don't need "value =" if there is only
-                        one param. hence I removed "value = " from all the classes wherever appropirate to
-                        fix these violations
+                        one param. hence I removed "value = " from all the classes wherever appropriate to
+                        fix these violations.
 
                         3. "UseLocaleWithCaseConversions" rule was bring violated in RouteController
-                        wherever we are converting to upper case or lower case. So fix the violation we should use a Locale.
+                        wherever we are converting to upper case or lower case. So to fix the violation we should use a Locale.
                         We can use Locale.US, Locale.UK, Locale.ROOT, etc. I used Locale.ROOT since it is language-neutral.
 
                         4. In MyFileDatabase, in deserializeObjectFromFile, we return a null value
-                        in case an exception occurs. This lead to a PMD violation to return empty collection rather than "null".
+                        in case an exception occurs. This lead to a PMD violation that asks to return empty collection rather than "null".
                         To fix it I changed return null; to return Collections.emptyMap(); This avoids NPE too.
 
                         5. The "LiteralsFirstInComparisons" was violated in IndividualProjectApplication.java when we used

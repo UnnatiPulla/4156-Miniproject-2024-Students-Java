@@ -48,7 +48,6 @@ public class RouteController {
             .toString(),
             HttpStatus.OK);
       }
-
     } catch (Exception e) {
       return handleException(e);
     }
